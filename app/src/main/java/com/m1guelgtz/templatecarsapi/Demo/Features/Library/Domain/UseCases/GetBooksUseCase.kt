@@ -1,8 +1,23 @@
 package com.m1guelgtz.templatecarsapi.Demo.Features.Library.Domain.UseCases
 
+import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Domain.Entities.Book
 import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Domain.Repository.BooksRepository
 
 class GetBooksUseCase (
     private val repository: BooksRepository
 ) {
+    suspend operator fun invoke(name: String) : Result<List<Book>> {
+        return try {
+            val books = repository.getBooks()
+            val filteredBooks = books.filter { it.name.isNotBlank() }
+            if (filteredBooks.isEmpty()){
+                Result.failure(Exception("No hay Libros validos"))
+            }
+            else {
+                Result.success(filteredBooks)
+            }
+        } catch (e: Exception){
+            Result.failure(e)
+        }
+    }
 }
