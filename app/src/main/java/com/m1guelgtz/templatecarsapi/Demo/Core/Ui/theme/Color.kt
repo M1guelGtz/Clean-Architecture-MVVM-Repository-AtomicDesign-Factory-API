@@ -1,4 +1,4 @@
-package com.m1guelgtz.templatecarsapi.ui.theme
+package com.m1guelgtz.templatecarsapi.Demo.Core.Ui.theme
 
 import androidx.compose.ui.graphics.Color
 

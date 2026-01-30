@@ -1,6 +1,5 @@
-package com.m1guelgtz.templatecarsapi.ui.theme
+package com.m1guelgtz.templatecarsapi.Demo.Core.Ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
