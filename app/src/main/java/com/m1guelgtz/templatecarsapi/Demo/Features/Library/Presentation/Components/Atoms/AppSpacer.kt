@@ -1,4 +1,4 @@
-package com.m1guelgtz.templatecarsapi.Demo.Core.Ui.Components.Atoms
+package com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Atoms
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height

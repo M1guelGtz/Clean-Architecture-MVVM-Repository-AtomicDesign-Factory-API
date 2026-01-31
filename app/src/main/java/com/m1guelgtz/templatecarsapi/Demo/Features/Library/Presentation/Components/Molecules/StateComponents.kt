@@ -1,4 +1,4 @@
-package com.m1guelgtz.templatecarsapi.Demo.Core.Ui.Components.Molecules
+package com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Molecules
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,8 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.m1guelgtz.templatecarsapi.Demo.Core.Ui.Components.Atoms.AppText
-import com.m1guelgtz.templatecarsapi.Demo.Core.Ui.Components.Atoms.TitleText
+import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Atoms.AppText
+import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Atoms.TitleText
 
 @Composable
 fun LoadingIndicator(

@@ -1,4 +1,4 @@
-package com.m1guelgtz.templatecarsapi.Demo.Core.Ui.Components.Molecules
+package com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Molecules
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,6 +14,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Atoms.SmallSpacer
+import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Atoms.SubtitleText
+import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Atoms.TitleText
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -61,13 +64,13 @@ fun InfoCard(
                     .weight(1f)
                     .padding(horizontal = 16.dp)
             ) {
-                com.m1guelgtz.templatecarsapi.Demo.Core.Ui.Components.Atoms.TitleText(
+                TitleText(
                     text = title,
                     maxLines = 1
                 )
                 subtitle?.let {
-                    com.m1guelgtz.templatecarsapi.Demo.Core.Ui.Components.Atoms.SmallSpacer()
-                    com.m1guelgtz.templatecarsapi.Demo.Core.Ui.Components.Atoms.SubtitleText(
+                    SmallSpacer()
+                    SubtitleText(
                         text = it,
                         maxLines = 2
                     )

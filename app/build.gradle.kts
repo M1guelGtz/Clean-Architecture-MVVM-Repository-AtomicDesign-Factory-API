@@ -74,6 +74,8 @@ dependencies {
 
     // Coil para cargar imágenes
     implementation("io.coil-kt:coil-compose:2.5.0")
+    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.navigation.compose)
 
     // Test
     testImplementation("junit:junit:4.13.2")

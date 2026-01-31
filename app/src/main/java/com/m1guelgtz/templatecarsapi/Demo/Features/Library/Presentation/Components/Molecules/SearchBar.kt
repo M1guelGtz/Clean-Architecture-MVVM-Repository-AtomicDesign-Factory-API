@@ -1,4 +1,4 @@
-package com.m1guelgtz.templatecarsapi.Demo.Core.Ui.Components.Molecules
+package com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Molecules
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape

@@ -1,4 +1,4 @@
-package com.m1guelgtz.templatecarsapi.Demo.Core.Ui.Components.Organisms
+package com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Organisms
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -10,8 +10,8 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import com.m1guelgtz.templatecarsapi.Demo.Core.Ui.Components.Atoms.AppIcon
-import com.m1guelgtz.templatecarsapi.Demo.Core.Ui.Components.Atoms.AppText
+import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Atoms.AppIcon
+import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Atoms.AppText
 
 
 @OptIn(ExperimentalMaterial3Api::class)

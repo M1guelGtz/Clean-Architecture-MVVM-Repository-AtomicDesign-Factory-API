@@ -16,19 +16,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.m1guelgtz.templatecarsapi.Demo.Core.Ui.Components.Molecules.EmptyState
-import com.m1guelgtz.templatecarsapi.Demo.Core.Ui.Components.Molecules.ErrorMessage
-import com.m1guelgtz.templatecarsapi.Demo.Core.Ui.Components.Molecules.LoadingIndicator
-import com.m1guelgtz.templatecarsapi.Demo.Core.Ui.Components.Molecules.SearchBar
-import com.m1guelgtz.templatecarsapi.Demo.Core.Ui.Components.Organisms.AppTopBar
-import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.BookCard
+import androidx.navigation.NavHostController
+import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Molecules.EmptyState
+import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Molecules.ErrorMessage
+import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Molecules.LoadingIndicator
+import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Molecules.SearchBar
+import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Organisms.AppTopBar
+import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Organisms.BookCard
 import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.ViewModels.LibraryViewModel
 import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.ViewModels.LibraryViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LibraryScreen(
-    factory: LibraryViewModelFactory
+    factory: LibraryViewModelFactory,
+    navController: NavHostController
 ) {
     val viewModel: LibraryViewModel = viewModel(factory = factory)
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
