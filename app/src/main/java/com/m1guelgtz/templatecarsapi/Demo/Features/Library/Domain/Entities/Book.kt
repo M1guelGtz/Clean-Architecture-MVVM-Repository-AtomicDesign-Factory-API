@@ -6,5 +6,6 @@ data class Book(
     val firstPublishYear: Int? = null,
     val editionCount: Int? = null,
     val language: List<String> = emptyList(),
-    val coverId: Int? = null
+    val coverId: Int? = null,
+    val rating: Float = 0f
 )

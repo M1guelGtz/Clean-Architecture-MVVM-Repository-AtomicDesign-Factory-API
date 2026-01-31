@@ -87,6 +87,7 @@ fun LibraryScreen(
                                     editionCount = book.editionCount,
                                     language = book.language,
                                     coverId = book.coverId,
+                                    rating = book.rating,
                                     modifier = Modifier.fillMaxWidth(),
                                     onClick = {
                                         navController.navigate("detalles/$index")
