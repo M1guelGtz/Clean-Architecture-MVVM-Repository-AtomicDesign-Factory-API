@@ -7,5 +7,6 @@ data class BooksUIState(
     val book: List<Book> = emptyList(),
     val error: String? = null,
     val isRefreshing: Boolean = false,
-    val searchQuery: String = ""
+    val searchQuery: String = "",
+    val showOnlyTop5: Boolean = false
 )

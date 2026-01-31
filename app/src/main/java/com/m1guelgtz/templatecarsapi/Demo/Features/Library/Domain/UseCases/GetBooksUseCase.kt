@@ -14,10 +14,9 @@ class GetBooksUseCase (
                 Result.failure(Exception("No hay Libros validos"))
             }
             else {
-                val topBooks = filteredBooks
-                    .sortedByDescending { it.rating }
-                    .take(5)
-                Result.success(topBooks)
+                // Devolver todos los libros ordenados por rating
+                val sortedBooks = filteredBooks.sortedByDescending { it.rating }
+                Result.success(sortedBooks)
             }
         } catch (e: Exception){
             Result.failure(e)
