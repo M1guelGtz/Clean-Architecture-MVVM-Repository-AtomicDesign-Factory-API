@@ -1,10 +1,23 @@
 package com.m1guelgtz.templatecarsapi.Demo.Features.Library.Data.DataSource.Remote.Model
 
+import com.google.gson.annotations.SerializedName
+
 data class BookResponse(
-    val results : List <BookDTO>
+    @SerializedName("docs")
+    val results: List<BookDTO>
 )
 
-data class BookDTO (
-    val name: String
-    // Atributos reales
+data class BookDTO(
+    @SerializedName("title")
+    val title: String,
+    @SerializedName("author_name")
+    val authorName: List<String>? = null,
+    @SerializedName("first_publish_year")
+    val firstPublishYear: Int? = null,
+    @SerializedName("edition_count")
+    val editionCount: Int? = null,
+    @SerializedName("language")
+    val language: List<String>? = null,
+    @SerializedName("cover_i")
+    val coverId: Int? = null
 )

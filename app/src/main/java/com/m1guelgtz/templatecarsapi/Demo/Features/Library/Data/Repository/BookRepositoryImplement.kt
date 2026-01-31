@@ -8,8 +8,8 @@ import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Domain.Repository.Boo
 class BookRepositoryImplement (
     private val api : OpenLibrary
 ) : BooksRepository {
-    override  suspend fun getBooks () : List<Book> {
-        val response = api.getBooks()
+    override suspend fun getBooks(query: String): List<Book> {
+        val response = api.getBooks(query)
         return response.results.map { it.toDomain() }
     }
 }

@@ -10,31 +10,35 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class LibraryViewModel (
-    private val usecase : GetBooksUseCase
+class LibraryViewModel(
+    private val usecase: GetBooksUseCase
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(BooksUIState())
     val uiState = _uiState.asStateFlow()
-    init {
-        loadBooks(name = "Soym")
+
+    fun onSearchQueryChange(query: String) {
+        _uiState.update { it.copy(searchQuery = query) }
     }
-    private fun loadBooks (name: String){
-        _uiState.update{ it.copy(isLoading = true) }
-        //cambiare el estado filtrando datos por nombre
+
+    fun searchBooks(query: String) {
+        if (query.isEmpty()) {
+            _uiState.update { it.copy(book = emptyList(), error = null) }
+            return
+        }
+
+        _uiState.update { it.copy(searchQuery = query, isLoading = true, error = null) }
         viewModelScope.launch {
-            val result = usecase(name)
-            _uiState.update {
-                curretState ->
+            val result = usecase(query)
+            _uiState.update { currentState ->
                 result.fold(
                     onSuccess = { list ->
-                        curretState.copy(isLoading = false, book = list)
+                        currentState.copy(isLoading = false, book = list)
                     },
                     onFailure = { error ->
-                        curretState.copy(isLoading = false, error = error.message)
+                        currentState.copy(isLoading = false, error = error.message)
                     }
                 )
             }
         }
-
     }
 }

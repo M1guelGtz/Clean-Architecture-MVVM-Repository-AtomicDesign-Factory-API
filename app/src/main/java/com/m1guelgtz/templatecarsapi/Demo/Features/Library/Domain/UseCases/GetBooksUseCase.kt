@@ -8,8 +8,8 @@ class GetBooksUseCase (
 ) {
     suspend operator fun invoke(name: String) : Result<List<Book>> {
         return try {
-            val books = repository.getBooks()
-            val filteredBooks = books.filter { it.name.isNotBlank() }
+            val books = repository.getBooks(name)
+            val filteredBooks = books.filter { it.title.isNotBlank() }
             if (filteredBooks.isEmpty()){
                 Result.failure(Exception("No hay Libros validos"))
             }

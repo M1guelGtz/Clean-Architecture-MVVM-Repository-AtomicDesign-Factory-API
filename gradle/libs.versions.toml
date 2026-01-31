@@ -15,6 +15,8 @@ retrofit = "3.0.0"
 converterGson = "3.0.0"
 ioCoilVersion = "2.7.0"
 ui = "1.10.1"
+lifecycleRuntimeCompose = "2.10.0"
+contentpager = "1.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -33,6 +35,8 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 io-coil-kt-coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "ioCoilVersion" }
 com-squareup-retrofit2-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 com-squareup-retrofit2-converter-json = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "converterGson" }
+androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
+androidx-contentpager = { group = "androidx.contentpager", name = "contentpager", version.ref = "contentpager" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

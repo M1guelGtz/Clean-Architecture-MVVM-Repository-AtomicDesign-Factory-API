@@ -17,6 +17,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField (
+                "String", "BASE_URL", "\"https://openlibrary.org/\""
+            )
+        }
 
         release {
             isMinifyEnabled = false
@@ -41,6 +46,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -63,6 +69,11 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.contentpager)
+
+    // Coil para cargar imágenes
+    implementation("io.coil-kt:coil-compose:2.5.0")
 
     // Test
     testImplementation("junit:junit:4.13.2")
