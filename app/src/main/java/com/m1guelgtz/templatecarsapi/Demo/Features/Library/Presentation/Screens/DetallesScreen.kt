@@ -1,10 +1,187 @@
 package com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Screens
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ComposableTarget
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Atoms.BookCover
+import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Atoms.SmallSpacer
+import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Atoms.SubtitleText
+import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Atoms.TitleText
+import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Molecules.ErrorMessage
+import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Molecules.LoadingIndicator
+import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.ViewModels.BookDetailsViewModel
+import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.ViewModels.BookDetailsViewModelFactory
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DetallesScreen(
+    id: Int, 
+    navController: NavHostController,
+    factory: BookDetailsViewModelFactory
+) {
+    val viewModel: BookDetailsViewModel = viewModel(factory = factory)
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        topBar = {
+            TopAppBar(
+                title = { Text("Detalles del Libro") },
+                navigationIcon = {
+                    IconButton(onClick = { navController.navigateUp() }) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Regresar"
+                        )
+                    }
+                }
+            )
+        }
+    ) { innerPadding ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+        ) {
+            when {
+                uiState.isLoading -> {
+                    LoadingIndicator()
+                }
+                uiState.error != null -> {
+                    ErrorMessage(message = uiState.error ?: "Error desconocido")
+                }
+                uiState.book != null -> {
+                    BookDetailsContent(
+                        book = uiState.book!!,
+                        modifier = Modifier.fillMaxSize()
+                    )
+                }
+            }
+        }
+    }
+}
 
 @Composable
-fun DetallesScreen(id: Int, navController: NavHostController) {
-    
+private fun BookDetailsContent(
+    book: com.m1guelgtz.templatecarsapi.Demo.Features.Library.Domain.Entities.Book,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .verticalScroll(rememberScrollState())
+            .padding(16.dp)
+    ) {
+        // Portada y título
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.Top
+        ) {
+            BookCover(
+                coverId = book.coverId,
+                size = 120.dp
+            )
+            Spacer(modifier = Modifier.width(16.dp))
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+                TitleText(
+                    text = book.title,
+                    maxLines = 5
+                )
+                SmallSpacer()
+                if (book.authors.isNotEmpty()) {
+                    SubtitleText(
+                        text = book.authors.joinToString(", "),
+                        maxLines = 3
+                    )
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        // Información adicional
+        InfoSection(title = "Información General") {
+            book.firstPublishYear?.let {
+                InfoItem(label = "Primer año de publicación", value = it.toString())
+            }
+            book.editionCount?.let {
+                InfoItem(label = "Número de ediciones", value = it.toString())
+            }
+            if (book.language.isNotEmpty()) {
+                InfoItem(
+                    label = "Idiomas disponibles",
+                    value = book.language.joinToString(", ")
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun InfoSection(
+    title: String,
+    content: @Composable () -> Unit
+) {
+    Column(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        content()
+    }
+}
+
+@Composable
+private fun InfoItem(
+    label: String,
+    value: String
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp)
+    ) {
+        Text(
+            text = label,
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        Text(
+            text = value,
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onSurface
+        )
+    }
 }

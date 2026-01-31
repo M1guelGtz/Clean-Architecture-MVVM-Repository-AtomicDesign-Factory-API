@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -29,10 +29,9 @@ import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.ViewMode
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LibraryScreen(
-    factory: LibraryViewModelFactory,
+    viewModel: LibraryViewModel,
     navController: NavHostController
 ) {
-    val viewModel: LibraryViewModel = viewModel(factory = factory)
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     
     Scaffold(
@@ -80,7 +79,7 @@ fun LibraryScreen(
                             modifier = Modifier.fillMaxSize(),
                             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
                         ) {
-                            items(uiState.book) { book ->
+                            itemsIndexed(uiState.book) { index, book ->
                                 BookCard(
                                     title = book.title,
                                     authors = book.authors,
@@ -88,7 +87,10 @@ fun LibraryScreen(
                                     editionCount = book.editionCount,
                                     language = book.language,
                                     coverId = book.coverId,
-                                    modifier = Modifier.fillMaxWidth()
+                                    modifier = Modifier.fillMaxWidth(),
+                                    onClick = {
+                                        navController.navigate("detalles/$index")
+                                    }
                                 )
                             }
                         }
