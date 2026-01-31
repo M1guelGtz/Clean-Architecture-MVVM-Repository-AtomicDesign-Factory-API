@@ -67,7 +67,7 @@ fun BookCard(
                     Icon(
                         imageVector = Icons.Default.Star,
                         contentDescription = "Rating",
-                        tint = Color(0xFFFFD700),
+                        tint = Color.Black,
                         modifier = Modifier.size(16.dp)
                     )
                     Spacer(modifier = Modifier.width(4.dp))
