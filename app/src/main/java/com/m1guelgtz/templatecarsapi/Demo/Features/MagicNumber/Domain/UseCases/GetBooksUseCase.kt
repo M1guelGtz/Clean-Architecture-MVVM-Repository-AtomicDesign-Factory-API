@@ -1,10 +1,9 @@
-package com.m1guelgtz.templatecarsapi.Demo.Features.Library.Domain.UseCases
+package com.m1guelgtz.templatecarsapi.Demo.Features.MagicNumber.Domain.UseCases
 
 import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Domain.Entities.Book
 import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Domain.Repository.BooksRepository
-import javax.inject.Inject
 
-class GetBooksUseCase @Inject constructor(
+class GetBooksUseCase (
     private val repository: BooksRepository
 ) {
     suspend operator fun invoke(name: String) : Result<List<Book>> {
@@ -12,9 +11,10 @@ class GetBooksUseCase @Inject constructor(
             val books = repository.getBooks(name)
             val filteredBooks = books.filter { it.title.isNotBlank() }
             if (filteredBooks.isEmpty()){
-                Result.failure(Exception("No hay Libros validos"))
+                Result.failure(Exception("No hay Libhfjhros validos"))
             }
             else {
+                // Devolver todos los libros ordenados por rating
                 val sortedBooks = filteredBooks.sortedByDescending { it.rating }
                 Result.success(sortedBooks)
             }

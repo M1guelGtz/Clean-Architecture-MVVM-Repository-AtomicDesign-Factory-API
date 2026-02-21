@@ -5,12 +5,15 @@ import androidx.lifecycle.viewModelScope
 import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Domain.Entities.Book
 import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Domain.UseCases.GetBooksUseCase
 import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Screens.BooksUIState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LibraryViewModel(
+@HiltViewModel
+class LibraryViewModel @Inject constructor(
     private val usecase: GetBooksUseCase
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(BooksUIState())

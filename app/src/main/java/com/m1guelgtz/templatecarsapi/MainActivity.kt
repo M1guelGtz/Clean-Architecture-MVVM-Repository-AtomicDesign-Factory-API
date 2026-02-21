@@ -10,7 +10,9 @@ import com.m1guelgtz.templatecarsapi.Demo.Core.Ui.theme.TemplateCarsAPITheme
 import com.m1guelgtz.templatecarsapi.Demo.Core.rutes.AppNavHost
 import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Di.BooksModule
 import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Screens.LibraryScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     lateinit var appContainer: AppConteiner
     override fun onCreate(savedInstanceState: Bundle?) {

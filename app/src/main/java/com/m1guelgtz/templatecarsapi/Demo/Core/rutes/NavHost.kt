@@ -16,9 +16,11 @@ import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Di.BooksModule
 import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Screens.DetallesScreen
 import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Screens.LibraryScreen
 import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.ViewModels.LibraryViewModel
+import com.m1guelgtz.templatecarsapi.Demo.Features.MagicNumber.Presentation.Screens.MagicNumberScreen
 
 @Composable
-fun AppNavHost(navController: NavHostController = rememberNavController(), appContainer: AppConteiner) {
+fun
+        AppNavHost(navController: NavHostController = rememberNavController(), appContainer: AppConteiner) {
     val libraryModule = remember { BooksModule(appContainer) }
     val libraryViewModelFactory = remember { libraryModule.provideBooksViewModelFactory() }
     val libraryViewModel: LibraryViewModel = viewModel(factory = libraryViewModelFactory)
@@ -30,6 +32,10 @@ fun AppNavHost(navController: NavHostController = rememberNavController(), appCo
     ) {
         composable(RutaInicio.ruta) {
             LibraryScreen(libraryViewModel, navController)
+        }
+
+        composable(RutaGame.ruta) {
+            MagicNumberScreen()
         }
 
         composable(
@@ -45,7 +51,5 @@ fun AppNavHost(navController: NavHostController = rememberNavController(), appCo
             )
             DetallesScreen(id, navController, factory)
         }
-
-
     }
 }
