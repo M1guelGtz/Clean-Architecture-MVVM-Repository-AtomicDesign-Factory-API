@@ -10,6 +10,6 @@ class BookRepositoryImplement (
 ) : BooksRepository {
     override suspend fun getBooks(query: String): List<Book> {
         val response = api.getBooks(query)
-        return response.results.map { it.toDomain() }
+        return response.docs.map { it.toDomain() }
     }
 }
