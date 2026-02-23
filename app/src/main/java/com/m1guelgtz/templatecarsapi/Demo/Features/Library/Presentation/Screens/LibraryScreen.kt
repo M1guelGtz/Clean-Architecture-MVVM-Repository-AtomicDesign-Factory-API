@@ -25,8 +25,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.m1guelgtz.templatecarsapi.Demo.Core.rutes.RutaDetalles
 import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Molecules.EmptyState
 import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Molecules.ErrorMessage
 import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Molecules.LoadingIndicator
@@ -34,7 +34,6 @@ import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Componen
 import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Organisms.AppTopBar
 import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Components.Organisms.BookCard
 import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.ViewModels.LibraryViewModel
-import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.ViewModels.LibraryViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -57,7 +56,6 @@ fun LibraryScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            // Search Bar
             SearchBar(
                 query = uiState.searchQuery,
                 onQueryChange = { viewModel.onSearchQueryChange(it) },
@@ -67,7 +65,6 @@ fun LibraryScreen(
                 enabled = !uiState.isLoading
             )
 
-            // Filtro Top 5
             if (uiState.book.isNotEmpty()) {
                 Row(
                     modifier = Modifier
@@ -97,7 +94,6 @@ fun LibraryScreen(
                 }
             }
 
-            // Content
             Box(
                 modifier = Modifier.fillMaxSize()
             ) {
@@ -130,7 +126,7 @@ fun LibraryScreen(
                                     rating = book.rating,
                                     modifier = Modifier.fillMaxWidth(),
                                     onClick = {
-                                        navController.navigate("detalles/$index")
+                                        navController.navigate(RutaDetalles(id = index))
                                     }
                                 )
                             }

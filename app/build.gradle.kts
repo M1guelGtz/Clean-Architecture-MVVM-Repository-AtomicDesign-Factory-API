@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
+    kotlin("plugin.serialization") version "2.0.21"
 }
 
 android {
@@ -53,47 +54,34 @@ android {
 }
 
 dependencies {
-    // androidx
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
-
-    // Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
-
-    // Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
-
-    // Retrofit
     implementation(libs.com.squareup.retrofit2.retrofit)
     implementation(libs.com.squareup.retrofit2.converter.json)
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.contentpager)
-
-    // Coil para cargar imágenes
     implementation(libs.io.coil.kt.coil.compose)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.navigation.compose)
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
 
-    // Test
     testImplementation(libs.junit)
-
-    // Android Test
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-
-    // Debug
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 }

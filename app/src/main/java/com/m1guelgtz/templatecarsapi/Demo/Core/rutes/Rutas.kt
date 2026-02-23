@@ -1,21 +1,12 @@
 package com.m1guelgtz.templatecarsapi.Demo.Core.rutes
 
+import kotlinx.serialization.Serializable
 
-sealed class Rutas(val ruta: String) {
-    companion object {
-        const val RUTA_INICIO = "inicio"
-        const val RUTA_GAME = "game"
-        const val RUTA_PERFIL = "perfil"
-        const val RUTA_CONFIGURACION = "configuracion"
-        const val RUTA_DETALLES = "detalles/{id}"
+@Serializable
+object RutaInicio
 
-    }
-}
+@Serializable
+object RutaGame
 
-object RutaInicio : Rutas("inicio")
-object RutaGame : Rutas("game")
-object RutaPerfil : Rutas("perfil")
-object RutaConfiguracion : Rutas("configuracion")
-object RutaDetalles : Rutas("detalles/{id}") {
-    fun crearRuta(id: Int) = "detalles/$id"
-}
+@Serializable
+data class RutaDetalles(val id: Int)

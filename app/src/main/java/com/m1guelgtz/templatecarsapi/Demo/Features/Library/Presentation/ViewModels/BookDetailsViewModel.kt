@@ -1,41 +1,45 @@
 package com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.ViewModels
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
+import com.m1guelgtz.templatecarsapi.Demo.Core.rutes.RutaDetalles
 import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Domain.Entities.Book
 import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Domain.UseCases.GetBookDetailsUseCase
 import com.m1guelgtz.templatecarsapi.Demo.Features.Library.Presentation.Screens.BookDetailsUIState
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedFactory
-import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class BookDetailsViewModel @AssistedInject constructor(
+@HiltViewModel
+class BookDetailsViewModel @Inject constructor(
     private val useCase: GetBookDetailsUseCase,
-    @Assisted("bookId") private val bookId: Int,
-    @Assisted("cachedBooks") private val cachedBooks: List<Book>
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    @AssistedFactory
-    interface Factory {
-        fun create(
-            @Assisted("bookId") bookId: Int,
-            @Assisted("cachedBooks") cachedBooks: List<Book>
-        ): BookDetailsViewModel
-    }
+    private val routeData = savedStateHandle.toRoute<RutaDetalles>()
+    private val bookId = routeData.id
     
     private val _uiState = MutableStateFlow(BookDetailsUIState())
     val uiState = _uiState.asStateFlow()
 
-    init {
+    // En una arquitectura real, los libros vendrían del repositorio (caché)
+    // Para mantener consistencia con tu código anterior, el NavHost proveerá la lista si es necesario
+    // o el ViewModel la obtendrá de un flujo compartido.
+    private var cachedBooks: List<Book> = emptyList()
+
+    fun setCachedBooks(books: List<Book>) {
+        cachedBooks = books
         loadBookDetails()
     }
 
     private fun loadBookDetails() {
+        if (cachedBooks.isEmpty()) return
+        
         _uiState.update { it.copy(isLoading = true, error = null) }
         viewModelScope.launch {
             val result = useCase(bookId, cachedBooks)
